@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif&display=swap');
+
+:root{
+    --primary-color: #084d24;
+    --secondary-color: #156b50;
+    --font-family: 'Noto Serif', serif;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+.container {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    padding: 0 20px;
+}
+
+.sections{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    /* padding: 0 20px; */
+    
+}
+
+.plantType {
+    display: flex;
+    flex-direction: column;
+    font-size: 2rem;
+}
+
+.plantElement {
+
+    font-size: 1.3rem;
+}
