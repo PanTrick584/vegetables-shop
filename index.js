@@ -15,11 +15,14 @@ class Plants {
 
             this.getDOM()
             this.domEl.sectionDiv.innerHTML = this.type;
-            return this.domEl
+            this.plantsInfo()
     }
 
     plantsInfo() {
-        console.log(`Most of ${this.type} is likely to ${this.destiny}.`)
+        this.domEl.pInfo = document.createElement('p');
+        this.domEl.pInfo.setAttribute('class', 'pInfo')
+        this.domEl.pInfo.innerHTML = `Most of ${this.type} is likely to ${this.destiny}.`
+        this.domEl.sectionDiv.appendChild(this.domEl.pInfo)
     }
 
     getDOM() {
@@ -38,25 +41,45 @@ class Fruits extends Plants {
         super(props);
         this.name = props.name;
         this.skinEat = props.skinEat;
-        this.sweetness = props.sweetness;    
+        this.sweetness = props.sweetness;
+
+        this.fruitEl = {};
         
         this.fruitInfo()
-        this.createFruitsElement()
+        this.createFruitElement()
 
     }
 
-    createFruitsElement(){
+    createFruitElement(){
+        
 
-        this.domEl.fruitDiv = document.createElement('div');
-        this.domEl.fruitDiv.setAttribute('class', 'plantElement')
-        this.domEl.fruitDiv.innerHTML = this.name;
-        let sectionDiv = document.getElementById('FruitType')
-        sectionDiv.setAttribute('class', 'plantType')
-        sectionDiv.appendChild(this.domEl.fruitDiv)
+        this.getDOMFruit();
+        this.fruitEl.fruitDiv.innerHTML = this.name;
+        this.fruitInfo()
+
+        return this.fruitEl;
+
     }
 
     fruitInfo() {
-        console.log(` In ${this.name} we can eat ${this.eatParts}`)
+
+        this.fruitEl.fruitInfo = document.createElement('p');
+        this.fruitEl.fruitInfo.innerHTML = `In ${this.name} we can eat ${this.eatParts}`;
+        this.fruitEl.fruitDiv.appendChild(this.fruitEl.fruitInfo)
+        console.log(this.fruitEl.fruitDiv)
+
+        return this.fruitEl;
+
+    }
+
+    getDOMFruit(){
+
+        this.fruitEl.fruitDiv = document.createElement('div');
+        this.fruitEl.fruitDiv.setAttribute('class', 'plantElement')
+
+        this.fruitEl.sectionDiv = document.getElementById('FruitType')
+        this.fruitEl.sectionDiv.setAttribute('class', 'plantType')
+        this.fruitEl.sectionDiv.appendChild(this.fruitEl.fruitDiv)
     }
 }
 
@@ -80,7 +103,6 @@ class Vegetables extends Plants {
         let sectionDiv = document.getElementById('VegetablesType')
         sectionDiv.setAttribute('class', 'plantType')
         sectionDiv.appendChild(this.domEl.vegetableDiv)
-        console.log(this.domEl.sectionDiv)
     }
 
     vegetableInfo() {
@@ -99,7 +121,6 @@ const propsFruits = {
 
 const fruit = new Plants(propsFruits);
 fruit.createElement();
-fruit.plantsInfo()
 
 
 // Apple
@@ -128,12 +149,12 @@ const banana = new Fruits(propsBanana)
 
 //vegetables
 const propsVegetables = {
-    type: 'Vegetables'
+    type: 'Vegetables',
+    destiny: 'cooking'
 }
 
 const vegetables = new Plants(propsVegetables)
 vegetables.createElement();
-vegetables.plantsInfo()
 
 //Carrot
 const porpsCarrot = {
@@ -146,4 +167,15 @@ const porpsCarrot = {
 }
 
 const carrot = new Vegetables(porpsCarrot);
+
+const porpsOnion = {
+    name: 'Onion',
+    destiny: 'Rare Eat',
+    type: 'Vegetable',
+    eatParts: "Root and leaf",
+    soupOrSalad: "Salad",
+    bestWith: 'Scrambled eggs'
+}
+
+const onion = new Vegetables(porpsOnion);
 
