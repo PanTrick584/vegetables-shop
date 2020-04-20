@@ -55,10 +55,11 @@ class FruitsAndVeges extends Plants {
         this.shopArray = [];
         
         // this.fruitInfo()
-        this.createFruitElement();
+        this.createFruitElement()
         this.clickElement();
 
     }
+    
 
     createFruitElement(){
         this.getDOMFruit();
@@ -91,6 +92,12 @@ class FruitsAndVeges extends Plants {
                 console.log(this.shopArray.length)
                 console.log(this.fruitEl.fruitDiv.id)
         })
+    }
+
+    basket() {
+
+        this.fruitEl.basket = document.getElementById('basket');
+        this.fruitEl.basketDiv = document.createElement('div')
     }
 }
 
