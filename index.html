@@ -3,34 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 <body>
-    
-    <header id="header">
-        <div class="header-h" id="header-h">
-            <h1>FRESH FOOD</h1>
-            <h2>we sell meat secretly too</h2>
+    <!-- navbar -->
+    <nav class="nav" id="nav">
+        <div class="nav-center" id="nav-center">
+                <span>
+                    <i class="fas fa-info-circle"></i>about
+                </span>
+                <span>
+                    <i class="fas fa-shopping-cart"></i>shop cart
+                </span>
         </div>
-        <div class="menu" id="menu">
-            <ul>
-                <li>Home</li>
-                <li>About</li>
-                <li>Shop Card</li>
-            </ul>
+    </nav>
+    <!-- end of navbar -->
+    <!-- heared -->
+    <header>
+        <div class="header-container">
+            <h1>fresh food</h1>
+            <!-- <h2>we sell meat secretly too</h2> -->
+            <button class="btn" id="button-header">shop now</button>
         </div>
-
     </header>
-    <div class="container" id="container">
-        <h1>CHOOSE YOUR FAVORITE FRUITS AND VEGETABLES</h1>
-        <div class="section" id="section"></div>
-    </div>
+    <!-- end of heared -->
+    <!-- products -->
+    <section class="products">
+        <!-- products-heared -->
+        <div class="products-header" id="products-header">
+            <h1>
+                <span>
+                    <i class="fas fa-carrot"></i>
+                </span>
+                always fresh
+                <span>
+                    <i class="fas fa-apple-alt"></i>
+                </span>
+            </h1>
+        </div>
+        <!-- end of products-heared -->
+        <!-- products container -->
+        <div class="products-container" id="products-container">
+            
+        </div>
+        <!-- end of products container -->
 
-    <section class="basket" id="basket">
     </section>
+    <!-- end of products -->
+    <!-- basket -->
+    <section class="basket" id="basket">
 
+    </section>
+    <!-- end of basket -->
 
-    <script src="index.js"></script>
+    <!-- footer -->
+    <footer>
+        <section class="footer-info" id="footer-info"></section>
+        <section class="footer-contact"></section>
+    </footer>
+    <!-- footer -->
+    
+    <script src="app.js"></script>
 </body>
 </html>

@@ -1,10 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Noto+Serif&display=swap');
 
 :root{
-    --primary-color: #cc8d89;
-    --secondary-color: #156b50;
-    --thirdpart-color: #75eb60;
+    --primary-color: #232323;
+    --secondary-color: #44F7B3;
+    --thirdpart-color: #FE525B;
     --font-family: 'Noto Serif', serif;
+    --font-size-small: 1.2rem;
+    --font-size-middle: 2.1rem;
+    --font-size-big: 4rem;
+
 }
 
 *{
@@ -12,93 +16,177 @@
 }
 
 body{
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
-    /* justify-content: center;
-    align-items: center; */
     background-color: var(--primary-color);
-    color: var(--secondary-color);
 }
+/* ---------- general elements styling ---------- */
+.btn{
+    cursor: pointer;
+    width: 180px;
+    height: 70px;
+    background-color: var(--thirdpart-color);
+    border: none;
+    border-radius: 30px;
+    font-size: var(--font-size-small);
+    font-family: var(--font-family);
+    color: #fff;
+}
+.btn:focus{
+    outline: none;
+    border: none;
+}
+.btn:active {
+    transform: scale(0.95);
+}
+
+h1{
+    font-size: var(--font-size-big);
+    margin: 0;
+    padding: 10px;
+}
+h2{
+    font-size: var(--font-size-middle);
+    margin: 0;
+    padding: 10px;
+}
+/* ---------- general elements styling ---------- */
+
+/* ---------- nav section ---------- */
+.nav{
+    background-color: var(--primary-color);
+    position: fixed;
+    width: 100%;
+    height: 120px;
+    font-size: var(--font-size-middle);
+    z-index: 2;
+}
+.nav-center{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 30px;
+}
+.nav-center span{
+    cursor: pointer;
+    color: #ffF;
+    margin: 0 20px;
+}
+.nav-center span i{
+    color: var(--thirdpart-color);
+    margin: 0 10px;
+}
+/* ---------- end of nav section ---------- */
+/* ---------- header ---------- */
+
 header{
     display: flex;
-    flex-direction: row;
-    justify-content: space-between; 
-     align-items: center;
-     margin: 0 170px;
-}
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 800px;
+    background-image: url('https://c.pxhere.com/photos/fe/be/strawberries_strawberry_delicious_fruit_food_dessert_sweet_healthy-808536.jpg!d');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover ;
+;}
 
-.header-h{
+.header-container{
     display: flex;
     flex-direction: column;
-}
-.menu ul{
-    display: flex;
-    flex-direction: row;
-    list-style-type: none;
-}
-li{
-    cursor: pointer;
-    width: 70px;
-    height: 70px;
-    background-color: var(--primary-color);
-    margin: 20px;
-    text-align: center;
-    border: 3px dashed var(--secondary-color);
-}
-li:hover{
-    background-color: var(--thirdpart-color);
+    align-items: center;
+    justify-content: center;
+    width: 600px;
+    background-color: var(--secondary-color);
+    padding: 30px;
+    margin-top: 40px;
+    border-radius: 80px;
+    opacity: 0.7;
 }
 
-.container {
+/* ---------- end of header ---------- */
+/* ---------- products ---------- */
+
+.products {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
-    padding: 20px;
+    background-color: #fff;
 }
 
-.section{
+.products-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    width: 100%;
+}
+
+.products-container {
     display: flex;
     flex-direction: row;
-    padding: 20px;
+    justify-content: center;
+    background-color: #fff;
+    color: #fff;
 }
 
-.plantType {
-
-    font-size: 2rem;
+.products-section {
     background-color: var(--primary-color);
-    color: var(--secondary-color);
+    width: 600px;
+    height: 100%;
+    margin: 0 40px;
     padding: 20px;
-    width: 50%;
 }
-
-.pInfo{
-    font-size: 1.1rem;
-    border-bottom: 2px dashed var(--secondary-color);
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
-    padding: 10px 0;
-
-
-}
-
-.plantElement {
-    cursor: pointer;
-    font-size: 1.3rem;
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
-    padding: 20px;
-    border: 3px dashed var(--primary-color);
-    margin: 10px 0;
-    height: 120px;
-}
-.plantElement:hover{
+.product-element {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    width: 100%;
+    font-size: var(--font-size-small);
+    border-radius: 15px;
     background-color: var(--thirdpart-color);
+    padding: 15px;
+    margin: 5px 0;
+}
+.product-element-btn{
+    background-color: var(--primary-color);
+}
+/* ---------- end of products ---------- */
+/* ---------- footer ---------- */
+footer {
+    background-color: #fff;
+}
+/* ---------- footer info ---------- */
+
+.footer-info{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 200px 0 50px;
 }
 
-.plantElement p{
-    font-size: 1.1rem;
+.footer-info-el{
+    width: 250px;
+    margin: 0 45px;
 }
+.footer-info-el h2{
+    margin: 0;
+    padding: 0;
+}
+
+/* ---------- end of footer info ---------- */
+/* ---------- footer contact ---------- */
+
+/* ---------- end of footer contact ---------- */
+/* ---------- end of footer ---------- */
+
+
 

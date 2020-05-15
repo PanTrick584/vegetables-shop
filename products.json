@@ -1,0 +1,25 @@
+{
+    "sections":[
+        {   
+            "type": "fruits",
+            "elements": 
+                [
+                    {"name": "apple", "price": "1.2", "id": 1},
+                    {"name": "banana", "price": "0.8", "id": 2},
+                    {"name": "pinaple", "price": "3.2", "id": 3},
+                    {"name": "strawbery", "price": "7", "id": 4}
+                    
+                ]
+        },
+        {
+            "type": "vegetables",
+            "elements":
+                [
+                    {"name": "pepper", "price": "1.2", "id": 1},
+                    {"name": "onion","price": "1.2", "id": 2},
+                    {"name": "carrot", "price": "2.1", "id": 3},
+                    {"name": "salary", "price": "2.1", "id": 4}
+                ]
+        }
+    ]
+}
