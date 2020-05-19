@@ -150,9 +150,10 @@ header{
     justify-content: space-between;
     height: 80px;
     width: 100%;
-    font-size: var(--font-size-small);
+    font-size: var(--font-size-middle);
     border-radius: 15px;
-    background-color: var(--thirdpart-color);
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
     padding: 15px;
     margin: 5px 0;
 }
@@ -176,17 +177,56 @@ footer {
 .footer-info-el{
     width: 250px;
     margin: 0 45px;
+
 }
 .footer-info-el h2{
     margin: 0;
     padding: 0;
+    color: var(--secondary-color);
+    /* background: -webkit-linear-gradient(var(--thirdpart-color), #333);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; */
 }
 
 /* ---------- end of footer info ---------- */
 /* ---------- footer contact ---------- */
 
+.footer-contact{
+    height: 400px;
+    background-image: url('https://c.pxhere.com/photos/fe/be/strawberries_strawberry_delicious_fruit_food_dessert_sweet_healthy-808536.jpg!d');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover ;
+}
 /* ---------- end of footer contact ---------- */
 /* ---------- end of footer ---------- */
+/* ---------- basket ---------- */
+.basket{
+    position: fixed;
+    top: 70%; 
+    right: 0;
+    height: 100%;
+    width: 100%;
+    transition: all 0.3s linear;
+    transform: translateY(100%);
+    z-index: 2;
+    background: var(--secondary-color);
+}
 
+.showBasket {
+    transform: translateY(0);
+}
 
-
+.close-btn{
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    font-size: var(--font-size-middle);
+}
+.clear-btn {
+    position: absolute;
+    left: 20px;
+    top: 100px;
+    font-size: var(--font-size-middle);
+}
+/* ---------- end of basket ---------- */

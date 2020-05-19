@@ -2,18 +2,22 @@
     "info":[
         {
             "name": "We Love",
+            "icon": "fas fa-heart",
             "info": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo ducimus dicta voluptas adipisci mollitia fugiat reiciendis reprehenderit, corrupti quod odio molestiae delectus amet? Velit in, tempora omnis aliquid numquam exercitationem cum qui excepturi blanditiis fuga, commodi suscipit voluptatibus quis saepe"
         },
         {
             "name": "Fast Travel",
+            "icon": "fas fa-truck",
             "info": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo ducimus dicta voluptas adipisci mollitia fugiat reiciendis reprehenderit, corrupti quod odio molestiae delectus amet? Velit in, tempora omnis aliquid numquam exercitationem cum qui excepturi blanditiis fuga, commodi suscipit voluptatibus quis saepe"
         },
         {
-            "name": "Best Sellers",
+            "name": "Best Sellers", 
+            "icon": "fas fa-chart-line",
             "info": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo ducimus dicta voluptas adipisci mollitia fugiat reiciendis reprehenderit, corrupti quod odio molestiae delectus amet? Velit in, tempora omnis aliquid numquam exercitationem cum qui excepturi blanditiis fuga, commodi suscipit voluptatibus quis saepe"
         },
         {
             "name": "Discounts",
+            "icon": "fas fa-tags",
             "info": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo ducimus dicta voluptas adipisci mollitia fugiat reiciendis reprehenderit, corrupti quod odio molestiae delectus amet? Velit in, tempora omnis aliquid numquam exercitationem cum qui excepturi blanditiis fuga, commodi suscipit voluptatibus quis saepe"
         }
     ]

@@ -1,18 +1,27 @@
 // DOM elements
 const productsContainer = document.getElementById('products-container');
 const footerInfo = document.getElementById('footer-info');
+const basketDOM = document.getElementById('basket');
+const basketContainer = document.getElementById('basket-container');
+const basketCloseBtn = document.getElementById('basket-close-btn');
+const basketClearBtn = document.getElementById('clear-btn');
+
+// BASKET
+let basket = [];
+// BUTTONS
+let buttonsDOM = [];
+// Products
+let shopItemsArray = [];
 
 // CLASSES
-
 class Products {
 
-    async getProduct(){
+    async getProducts(){
 
         try {
                 let result = await fetch('./products.json');
                 let data = await result.json();
                 let section = data.sections;
-                console.log(section)
                 return section;
         } catch (error) {
             console.log(error)
@@ -33,24 +42,12 @@ class Products {
 }
 
 class UI {
-    
 
-    createSection(product) {
-
+        createSection(product) {
         let section = '';
         product.forEach( product => {
-            
-            let element = product.elements.map( el => {
-
-                let div = '';
-                return div += 
-                         `
-                          <div class="product-element" data-id="${el.id}">
-                            <span class="product-element-name">${el.name}</span>
-                            <span class="product-element-price">price: ${el.price}</span>
-                            <button class="product-element-btn btn">+</button>
-                          </div>
-                        `;
+                    let element = product.elements.map( el => {
+                    return this.createItem(el);
             });
             section +=
             `
@@ -63,6 +60,18 @@ class UI {
         productsContainer.innerHTML = section;
     }
 
+    createItem(el) {
+        let div = '';
+        return div += 
+                 `
+                  <div class="product-element" data-id="${el.id}">
+                    <span class="product-element-name">${el.name}</span>
+                    <span class="product-element-price">price: ${el.price}</span>
+                    <button class="product-element-btn btn" data-id="${el.id}">+</button>
+                  </div>
+                `;
+    }
+
     shopInfo(info) {
         
         let result = '';
@@ -71,7 +80,12 @@ class UI {
             result +=
             `
                 <div class="footer-info-el">
-                    <h2>${info.name}</h2>
+                    <h2>
+                        <span>
+                        <i class="${info.icon}"></i>
+                        </span>
+                        ${info.name}
+                    </h2>
                     <p>${info.info}</p>
                 </div>
             `
@@ -79,137 +93,77 @@ class UI {
         footerInfo.innerHTML = result;
     }
 
-}
-// Fruits
-class FruitsAndVeges {
-    constructor(props){
-        // super(props);
-        this.name = props.name;
-        this.skinEat = props.skinEat;
-        this.sweetness = props.sweetness;
-        this.type = props.type;
+    createBasket() {
 
-        this.fruitEl = {};
-        this.shopArray = [];
         
-        // this.fruitInfo()
-        // this.createFruitElement()
-        // this.clickElement();
-
-    }
-    
-
-    createFruitElement(){
-        // this.getDOMFruit();
-        this.fruitEl.fruitDiv.innerHTML = this.name;
-        this.fruitEl.fruitDiv.appendChild(this.fruitEl.fruitInfo)
-        this.fruitEl.fruitInfo.innerHTML = `In ${this.name} we can eat ${this.eatParts}`;
+        basketCloseBtn.addEventListener('click', this.hideBasket);
+        this.getButtons();
     }
 
-    // getDOMFruit(){
+    getButtons() {
+        let buttons = [...document.querySelectorAll('.product-element-btn')];
+        buttonsDOM = buttons;
+        buttons.forEach( button => {
+            addEventListener('click', event => {
+                this.showBasket();
+                console.log(shopItemsArray)
 
-    //     this.fruitEl.fruitDiv = document.createElement('div');
-    //     this.fruitEl.fruitDiv.setAttribute('class', 'plantElement')
-    //     this.fruitEl.fruitDiv.setAttribute('id', `${this.name}`)
+               let name = event.target.previousElementSibling.previousElementSibling.innerText;
+               console.log(name);
 
-    //     this.fruitEl.fruitInfo = document.createElement('p');
-
-    //     this.fruitEl.sectionDiv = document.getElementById(`${this.type}Type`)
-    //     // this.fruitEl.sectionDiv.setAttribute('class', 'plantType')
-    //     this.fruitEl.sectionDiv.appendChild(this.fruitEl.fruitDiv)
-
-    // }
-
-    clickElement(){
-
-                this.fruitEl.fruitDiv.addEventListener('click', ()=> {
-                this.shopArray.push(this.fruitEl.fruitDiv.id)
-                // this.shopCard[this.fruitEl.fruitDiv.innerHTML] = counter;
-                // console.log(this.shopCard)
-                console.log(this.shopArray)
-                console.log(this.shopArray.length)
-                console.log(this.fruitEl.fruitDiv.id)
+               
+               let basketElement = shopItemsArray.map( el => {
+                   if(el.name === name){
+                    let item = this.createItem(el);
+                    return item;
+                   }
+               })
+               console.log(basketElement)
+               basketContainer.innerHTML = basketElement.join('');
+            })
+            // let item = '';
+            // item += createItem(el);
+            // basketDOM
         })
     }
 
-    basket() {
+    showBasket() {
+        basketDOM.classList.add('showBasket');
+    }
 
-        this.fruitEl.basket = document.getElementById('basket');
-        this.fruitEl.basketDiv = document.createElement('div')
+    hideBasket() {
+        basketDOM.classList.remove('showBasket');
     }
 }
 
-// FRUITS
-const propsFruits = {
-    type: 'Fruit',
-    destiny: "Rare eat"
+class Store {
+    static storeProduct(product) {
+       
+       let shopItems = product.map( prod => {
+         let items = prod.elements.map( el => {
+             const name = el.name;
+             const category = prod.type;
+             const price = el.price;
+             return {name, category, price};
+         });
+         return items;
+     })
+    shopItemsArray = shopItems.flat();
+    return console.log(shopItemsArray)
+    }
 }
-
-// const fruit = new Plants(propsFruits);
-// fruit.createElement();
-
-
-// Apple
-const propsApple = {
-    name: 'Apple',
-    type: "Fruit",
-    eatParts: "Entire, even with middle",
-    skinEat: 'Sure',
-    sweetness: 'Most'
-}
-
-const apple = new FruitsAndVeges(propsApple);
-
-// Banana
-const propsBanana = {
-    name: 'Banana',
-    type: "Fruit",
-    eatParts: "Only middle",
-    skinEat: 'absolutly not!',
-    sweetness: 'Most'
-}
-
-const banana = new FruitsAndVeges(propsBanana);
-
-const propsPineapple = {
-    name: 'Pineapple',
-    type: 'Fruit',
-    eatParts: 'Main part',
-    skinEat: 'absolutly not!',
-    sweetness: 'Very impressive'
-}
-
-const pineapple = new FruitsAndVeges(propsPineapple);
-
-//VEGETABLES
-const propsVegetables = {
-    type: 'Vegetables',
-    destiny: 'cooking'
-}
-
-// const vegetables = new Plants(propsVegetables)
-// vegetables.createElement();
-
-//Carrot
-const porpsCarrot = {
-    name: 'Carrot',
-    type: 'Vegetables',
-    eatParts: "Root",
-    soupOrSalad: "Both Soup or Salad",
-    bestWith: 'parsley or celery'
-}
-
-const carrot = new FruitsAndVeges(porpsCarrot);
-
 document.addEventListener('DOMContentLoaded', ()=>{
 
     const ui = new UI();
     const product = new Products();
 
     // get products
-    product.getProduct().then( product => {
+    product.getProducts().then( product => {
         ui.createSection(product);
+        Store.storeProduct(product);
+        ui.getButtons();
     });
+
     // get info
     product.getInfo().then( info => {
         ui.shopInfo(info);
