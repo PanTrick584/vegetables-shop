@@ -3,8 +3,9 @@ const productsContainer = document.getElementById('products-container');
 const footerInfo = document.getElementById('footer-info');
 const basketDOM = document.getElementById('basket');
 const basketContainer = document.getElementById('basket-container');
-const basketCloseBtn = document.getElementById('basket-close-btn');
+const basketCloseBtn = document.getElementById('close-btn');
 const basketClearBtn = document.getElementById('clear-btn');
+const basketTotalBtn = document.getElementById('total-btn');
 
 // BASKET
 let basket = [];
@@ -15,7 +16,7 @@ let shopItemsArray = [];
 
 // CLASSES
 class Products {
-
+    //get products
     async getProducts(){
 
         try {
@@ -27,7 +28,7 @@ class Products {
             console.log(error)
         }
     }
-
+    //get footer info
     async getInfo() {
 
         try {
@@ -42,11 +43,12 @@ class Products {
 }
 
 class UI {
-
+        // create main section of products
         createSection(product) {
         let section = '';
         product.forEach( product => {
                     let element = product.elements.map( el => {
+                        //create products elements in sections
                     return this.createItem(el);
             });
             section +=
@@ -59,7 +61,7 @@ class UI {
         })
         productsContainer.innerHTML = section;
     }
-
+    // create single element of product in sections
     createItem(el) {
         let div = '';
         return div += 
@@ -92,40 +94,73 @@ class UI {
         });
         footerInfo.innerHTML = result;
     }
-
+    // BASKET
     createBasket() {
 
-        
-        basketCloseBtn.addEventListener('click', this.hideBasket);
         this.getButtons();
+        basketCloseBtn.addEventListener('click', this.hideBasket);
+        basketClearBtn.addEventListener('click', this.basketClear);
+
+    }
+
+    createBasketElement(name) {
+        // take element from array and create in basket
+        let basketElement = shopItemsArray.find( el => {
+            if(el.name === name) {
+                return el;
+            }
+        });
+        // check if element is already in basket
+        let findElement = basket.find( findEl => findEl.name === name);
+            if(findElement){
+                findElement.amount++;
+                return this.createBasketItem();
+
+            } else {
+                basketElement.amount++;
+                basket.push(basketElement);
+                return this.createBasketItem();
+           }
+
+    }
+
+    createBasketItem() {
+
+       return basket.map( el => {
+            let div = '';
+            let total = el.price * el.amount;
+        
+        return div += 
+                 `
+                  <div class="basket-element" data-id="${el.id}">
+                    <span class="basket-element-name">${el.name}</span>
+                    <span class="basket-element-price">price: ${el.price}</span>
+                    <span class="basket-element-amount">amount: ${el.amount}</span>
+                    <span class="basket-element-total">total: ${parseFloat(total.toFixed(2))}</span>
+                    <button class="basket-element-btn plus" data-id="${el.id}">+</button>
+                    <button class="basket-element-btn minus" data-id="${el.id}">-</button>
+                  </div>
+                `;
+        })
     }
 
     getButtons() {
         let buttons = [...document.querySelectorAll('.product-element-btn')];
         buttonsDOM = buttons;
         buttons.forEach( button => {
-            addEventListener('click', event => {
+            button.addEventListener('click', event => {
                 this.showBasket();
-                console.log(shopItemsArray)
-
-               let name = event.target.previousElementSibling.previousElementSibling.innerText;
-               console.log(name);
-
-               
-               let basketElement = shopItemsArray.map( el => {
-                   if(el.name === name){
-                    let item = this.createItem(el);
-                    return item;
-                   }
-               })
-               console.log(basketElement)
-               basketContainer.innerHTML = basketElement.join('');
+                // find name of clicked element
+                let name = event.target.previousElementSibling.previousElementSibling.innerText;
+                // find and create element in basket
+                basketContainer.innerHTML = this.createBasketElement(name);
+                basketTotalBtn.innerHTML = this.basketTotalPrice();
+                this.itemsAmount(name);
             })
-            // let item = '';
-            // item += createItem(el);
-            // basketDOM
         })
     }
+
+    
 
     showBasket() {
         basketDOM.classList.add('showBasket');
@@ -133,6 +168,32 @@ class UI {
 
     hideBasket() {
         basketDOM.classList.remove('showBasket');
+    }
+    // take total price of products in basket
+    basketTotalPrice() {
+        return parseFloat(basket.map( el => el.price * el.amount).reduce( (total, price) => price + total).toFixed(2));
+    }
+
+    itemsAmount(name) {
+        let plusBasketItem = document.querySelector('.plus').addEventListener('click', e=>this.changeAmount(name, e));
+        let minusBasketItem = document.querySelector('.minus').addEventListener('click', e=>this.changeAmount(name, e));
+    }
+
+    changeAmount(name, e) {
+        let elTarget = basket.find( el => el.name === name);
+        if(e.target.innerText === '+'){
+            return basket.forEach( el => el === elTarget ? ++el.amount : '');
+        } else {
+            return basket.forEach( el => el === elTarget ? --el.amount : '');
+        }
+        
+    }
+    // clear all basket
+    basketClear() {
+        basket.forEach( el => el.amount = 0);
+        basket.length = 0;
+        basketTotalBtn.innerHTML = 0;
+        basketContainer.innerHTML = '';
     }
 }
 
@@ -144,12 +205,13 @@ class Store {
              const name = el.name;
              const category = prod.type;
              const price = el.price;
-             return {name, category, price};
+             const amount = 0;
+             return {name, category, price, amount};
          });
          return items;
      })
     shopItemsArray = shopItems.flat();
-    return console.log(shopItemsArray)
+    return shopItemsArray
     }
 }
 document.addEventListener('DOMContentLoaded', ()=>{
@@ -161,7 +223,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     product.getProducts().then( product => {
         ui.createSection(product);
         Store.storeProduct(product);
-        ui.getButtons();
+        ui.createBasket();
     });
 
     // get info
